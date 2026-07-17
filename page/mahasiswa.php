@@ -36,76 +36,102 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 ?>
 <div class="row">
 	<div class="col-md-4">
-	    <div class="panel panel-<?= ($update) ? "warning" : "info" ?>">
-	        <div class="panel-heading"><h3 class="text-center"><?= ($update) ? "EDIT" : "TAMBAH" ?></h3></div>
-	        <div class="panel-body">
+	    <div class="card shadow-sm mb-4 border-0">
+	        <div class="card-header bg-<?= ($update) ? "warning" : "primary text-white" ?> border-0 pt-4 pb-3">
+                <h5 class="text-center mb-0 fw-bold"><i class="fa-solid <?= ($update) ? "fa-pen-to-square" : "fa-user-plus" ?> me-2"></i><?= ($update) ? "EDIT" : "TAMBAH" ?> MAHASISWA</h5>
+            </div>
+	        <div class="card-body bg-light">
 	            <form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
-	                <div class="form-group">
-	                    <label for="nim">NIM</label>
-	                    <input type="text" name="nim" class="form-control" <?= (!$update) ?: 'value="'.$row["nim"].'"' ?>>
+	                <div class="mb-3">
+	                    <label class="form-label fw-semibold text-muted" for="nim">NIM</label>
+	                    <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-id-card text-muted"></i></span>
+                            <input type="text" name="nim" class="form-control border-start-0 ps-0" <?= (!$update) ?: 'value="'.$row["nim"].'"' ?> placeholder="Masukkan NIM...">
+                        </div>
 	                </div>
-	                <div class="form-group">
-	                    <label for="nama">Nama Lengkap</label>
-	                    <input type="text" name="nama" class="form-control" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
+	                <div class="mb-3">
+	                    <label class="form-label fw-semibold text-muted" for="nama">Nama Lengkap</label>
+	                    <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-user text-muted"></i></span>
+                            <input type="text" name="nama" class="form-control border-start-0 ps-0" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?> placeholder="Masukkan Nama Lengkap...">
+                        </div>
 	                </div>
-	                <div class="form-group">
-	                    <label for="alamat">Alamat</label>
-	                    <input type="text" name="alamat" class="form-control" <?= (!$update) ?: 'value="'.$row["alamat"].'"' ?>>
+	                <div class="mb-3">
+	                    <label class="form-label fw-semibold text-muted" for="alamat">Alamat</label>
+	                    <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-map-location-dot text-muted"></i></span>
+                            <input type="text" name="alamat" class="form-control border-start-0 ps-0" <?= (!$update) ?: 'value="'.$row["alamat"].'"' ?> placeholder="Masukkan Alamat...">
+                        </div>
 	                </div>
-									<div class="form-group">
-	                  <label for="jenis_kelamin">Jenis Kelamin</label>
-										<select class="form-control" name="jenis_kelamin">
-											<option>---</option>
-											<option value="Laki-laki" <?= (!$update) ?: (($row["jenis_kelamin"] != "Laki-laki") ?: 'selected="on"') ?>>Laki-laki</option>
-											<option value="Perempuan" <?= (!$update) ?: (($row["jenis_kelamin"] != "Perempuan") ?: 'selected="on"') ?>>Perempuan</option>
-										</select>
-									</div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+					<div class="mb-4">
+	                  <label class="form-label fw-semibold text-muted" for="jenis_kelamin">Jenis Kelamin</label>
+                      <div class="input-group">
+                          <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-venus-mars text-muted"></i></span>
+                          <select class="form-select border-start-0 ps-0" name="jenis_kelamin">
+                              <option>--- Pilih Jenis Kelamin ---</option>
+                              <option value="Laki-laki" <?= (!$update) ?: (($row["jenis_kelamin"] != "Laki-laki") ?: 'selected="on"') ?>>Laki-laki</option>
+                              <option value="Perempuan" <?= (!$update) ?: (($row["jenis_kelamin"] != "Perempuan") ?: 'selected="on"') ?>>Perempuan</option>
+                          </select>
+                      </div>
+					</div>
+	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "primary" ?> w-100 mb-2 fw-bold shadow-sm">
+                        <i class="fa-solid fa-floppy-disk me-2"></i> Simpan Data
+                    </button>
 	                <?php if ($update): ?>
-										<a href="?page=mahasiswa" class="btn btn-info btn-block">Batal</a>
-									<?php endif; ?>
+						<a href="?page=mahasiswa" class="btn btn-secondary w-100 fw-bold shadow-sm"><i class="fa-solid fa-xmark me-2"></i> Batal</a>
+					<?php endif; ?>
 	            </form>
 	        </div>
 	    </div>
 	</div>
 	<div class="col-md-8">
-	    <div class="panel panel-info">
-	        <div class="panel-heading"><h3 class="text-center">DAFTAR MAHASISWA</h3></div>
-	        <div class="panel-body">
-	            <table class="table table-condensed">
-	                <thead>
-	                    <tr>
-	                        <th>No</th>
-	                        <th>NIM</th>
-	                        <th>Nama</th>
-	                        <th>Alamat</th>
-	                        <th>Jenis Kelamin</th>
-	                        <th>Tahun</th>
-	                        <th></th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <?php $no = 1; ?>
-	                    <?php if ($query = $connection->query("SELECT * FROM mahasiswa")): ?>
-	                        <?php while($row = $query->fetch_assoc()): ?>
-	                        <tr>
-	                            <td><?=$no++?></td>
-	                            <td><?=$row['nim']?></td>
-	                            <td><?=$row['nama']?></td>
-	                            <td><?=$row['alamat']?></td>
-	                            <td><?=$row['jenis_kelamin']?></td>
-	                            <td><?=$row['tahun_mengajukan']?></td>
-	                            <td>
-	                                <div class="btn-group">
-	                                    <a href="?page=mahasiswa&action=update&key=<?=$row['nim']?>" class="btn btn-warning btn-xs">Edit</a>
-	                                    <a href="?page=mahasiswa&action=delete&key=<?=$row['nim']?>" class="btn btn-danger btn-xs">Hapus</a>
-	                                </div>
-	                            </td>
-	                        </tr>
-	                        <?php endwhile ?>
-	                    <?php endif ?>
-	                </tbody>
-	            </table>
+	    <div class="card shadow-sm border-0">
+	        <div class="card-header bg-white border-bottom pt-4 pb-3 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold text-dark"><i class="fa-solid fa-users text-primary me-2"></i> DAFTAR MAHASISWA</h5>
+            </div>
+	        <div class="card-body p-0">
+				<div class="table-responsive">
+					<table class="table table-hover align-middle mb-0">
+						<thead class="table-light">
+							<tr>
+								<th class="ps-4">No</th>
+								<th>NIM</th>
+								<th>Nama Lengkap</th>
+								<th>Alamat</th>
+								<th>Gender</th>
+								<th>Tahun</th>
+								<th class="text-center">Opsi</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $no = 1; ?>
+							<?php if ($query = $connection->query("SELECT * FROM mahasiswa")): ?>
+								<?php while($row = $query->fetch_assoc()): ?>
+								<tr>
+									<td class="ps-4"><?=$no++?></td>
+									<td><span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary rounded-pill"><?=$row['nim']?></span></td>
+									<td class="fw-semibold text-dark"><?=$row['nama']?></td>
+									<td class="text-muted small"><?=$row['alamat']?></td>
+									<td>
+                                        <?php if($row['jenis_kelamin'] == 'Laki-laki'): ?>
+                                            <span class="text-primary"><i class="fa-solid fa-mars me-1"></i> L</span>
+                                        <?php else: ?>
+                                            <span class="text-danger"><i class="fa-solid fa-venus me-1"></i> P</span>
+                                        <?php endif; ?>
+                                    </td>
+									<td><span class="badge bg-info text-dark"><?=$row['tahun_mengajukan']?></span></td>
+									<td class="text-center">
+										<div class="btn-group btn-group-sm shadow-sm">
+											<a href="?page=mahasiswa&action=update&key=<?=$row['nim']?>" class="btn btn-warning" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+											<a href="?page=mahasiswa&action=delete&key=<?=$row['nim']?>" class="btn btn-danger" title="Hapus"><i class="fa-solid fa-trash"></i></a>
+										</div>
+									</td>
+								</tr>
+								<?php endwhile ?>
+							<?php endif ?>
+						</tbody>
+					</table>
+				</div>
 	        </div>
 	    </div>
 	</div>

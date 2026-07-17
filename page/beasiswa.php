@@ -36,52 +36,60 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 ?>
 <div class="row">
 	<div class="col-md-4">
-	    <div class="panel panel-<?= ($update) ? "warning" : "info" ?>">
-	        <div class="panel-heading"><h3 class="text-center"><?= ($update) ? "EDIT" : "TAMBAH" ?></h3></div>
-	        <div class="panel-body">
+	    <div class="card shadow-sm mb-4">
+	        <div class="card-header bg-<?= ($update) ? "warning" : "primary text-white" ?>">
+	            <h5 class="text-center mb-0 fw-bold"><?= ($update) ? "EDIT" : "TAMBAH" ?> JENIS BEASISWA</h5>
+	        </div>
+	        <div class="card-body">
 	            <form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
-	                <div class="form-group">
-	                    <label for="nama">Nama</label>
-	                    <input type="text" name="nama" class="form-control" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
+	                <div class="mb-3">
+	                    <label class="form-label fw-semibold" for="nama">Nama Beasiswa</label>
+	                    <input type="text" name="nama" class="form-control" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?> placeholder="Masukkan nama beasiswa">
 	                </div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "primary" ?> w-100 mb-2">
+	                    <i class="fa-solid fa-floppy-disk me-1"></i> Simpan
+	                </button>
 	                <?php if ($update): ?>
-										<a href="?page=beasiswa" class="btn btn-info btn-block">Batal</a>
-									<?php endif; ?>
+						<a href="?page=beasiswa" class="btn btn-secondary w-100"><i class="fa-solid fa-xmark me-1"></i> Batal</a>
+					<?php endif; ?>
 	            </form>
 	        </div>
 	    </div>
 	</div>
 	<div class="col-md-8">
-	    <div class="panel panel-info">
-	        <div class="panel-heading"><h3 class="text-center">DAFTAR</h3></div>
-	        <div class="panel-body">
-	            <table class="table table-condensed">
-	                <thead>
-	                    <tr>
-	                        <th>No</th>
-	                        <th>Nama</th>
-	                        <th></th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <?php $no = 1; ?>
-	                    <?php if ($query = $connection->query("SELECT * FROM beasiswa")): ?>
-	                        <?php while($row = $query->fetch_assoc()): ?>
+	    <div class="card shadow-sm">
+	        <div class="card-header bg-primary text-white">
+	            <h5 class="text-center mb-0 fw-bold">DAFTAR BEASISWA</h5>
+	        </div>
+	        <div class="card-body p-0">
+	            <div class="table-responsive">
+	                <table class="table table-hover table-striped mb-0 align-middle">
+	                    <thead>
 	                        <tr>
-	                            <td><?=$no++?></td>
-	                            <td><?=$row['nama']?></td>
-	                            <td>
-	                                <div class="btn-group">
-	                                    <a href="?page=beasiswa&action=update&key=<?=$row['kd_beasiswa']?>" class="btn btn-warning btn-xs">Edit</a>
-	                                    <a href="?page=beasiswa&action=delete&key=<?=$row['kd_beasiswa']?>" class="btn btn-danger btn-xs">Hapus</a>
-	                                </div>
-	                            </td>
+	                            <th class="ps-3">No</th>
+	                            <th>Nama Beasiswa</th>
+	                            <th class="text-center">Opsi</th>
 	                        </tr>
-	                        <?php endwhile ?>
-	                    <?php endif ?>
-	                </tbody>
-	            </table>
+	                    </thead>
+	                    <tbody>
+	                        <?php $no = 1; ?>
+	                        <?php if ($query = $connection->query("SELECT * FROM beasiswa")): ?>
+	                            <?php while($row = $query->fetch_assoc()): ?>
+	                            <tr>
+	                                <td class="ps-3"><?=$no++?></td>
+	                                <td class="fw-semibold"><?=$row['nama']?></td>
+	                                <td class="text-center">
+	                                    <div class="btn-group btn-group-sm">
+	                                        <a href="?page=beasiswa&action=update&key=<?=$row['kd_beasiswa']?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+	                                        <a href="?page=beasiswa&action=delete&key=<?=$row['kd_beasiswa']?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</a>
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                            <?php endwhile ?>
+	                        <?php endif ?>
+	                    </tbody>
+	                </table>
+	            </div>
 	        </div>
 	    </div>
 	</div>

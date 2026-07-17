@@ -53,7 +53,7 @@ if (!isset($_SESSION["is_logged"])) {
             align-items: center;
             letter-spacing: 0.5px;
             text-decoration: none;
-            color: #fff;
+            color: #f8fafc;
         }
         #sidebar .sidebar-brand i {
             color: #3b82f6; /* Blue 500 */
@@ -166,7 +166,7 @@ if (!isset($_SESSION["is_logged"])) {
         <nav id="sidebar">
             <a class="sidebar-brand" href="?page=home">
                 <i class="fa-solid fa-graduation-cap"></i> 
-                <div>DSS SAW<br><small style="font-size:10px; font-weight:400; color:#94a3b8;">Sistem Beasiswa</small></div>
+                <div>Pusat Kendali Beasiswa Cerdas<br><small style="font-size:10px; font-weight:400; color:#cbd5e1;">Sistem Beasiswa</small></div>
             </a>
 
             <ul class="list-unstyled components">

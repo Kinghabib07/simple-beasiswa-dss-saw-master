@@ -19,10 +19,10 @@
 
     .welcome-banner {
         background: linear-gradient(-45deg, #1e3a8a, #1e40af, #3b82f6, #2563eb);
-        background-size: 400% 400%;
+        background-size: 400% 400%; 
         animation: gradientBG 15s ease infinite;
         border-radius: 20px;
-        color: white;
+        color: #fffbeb;
         padding: 3rem;
         position: relative;
         overflow: hidden;
@@ -137,10 +137,10 @@
             <span class="badge bg-white text-danger px-3 py-2 rounded-pill fw-bold mb-3 shadow-sm" style="font-size: 0.9rem;">
                 <i class="fa-solid fa-rocket me-1"></i> Dashboard Sistem SAW
             </span>
-            <h1 class="fw-bold mb-3 display-5" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+            <h1 class="fw-bold mb-3 display-5" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2); color: #fffbeb;">
                 Selamat Datang, <?= ucfirst($_SESSION["username"]) ?>!
             </h1>
-            <p class="lead mb-0" style="max-width: 650px; font-weight: 300; opacity: 0.9;">
+            <p class="lead mb-0" style="max-width: 650px; font-weight: 300; opacity: 0.95; color: #f1f5f9;">
                 Sistem Cerdas Penyeleksian Penerima Beasiswa Prestasi Akademik (BPA) & LazisMU menggunakan algoritma <strong>Simple Additive Weighting</strong>.
             </p>
         </div>
